@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>分页Demo</title>
+<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<!--<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>-->
+<script src="js/extendPagination.js"></script>
+</head>
+
+<body>
+<div id="callBackPagination" class="piece">
+  <div id="mainContent"></div>
+  <div id="callBackPager"></div>
+</div>
+</body>
+<script type="text/javascript">
+
+/*    function callBackPagination() {*/
+
+        var totalCount =  252, 
+        showCount =1
+        limit =10;
+
+        createTable(1, limit, totalCount);
+
+        $('#callBackPager').extendPagination({
+
+            totalCount: totalCount,
+
+            showCount: showCount,
+
+            limit: limit,
+
+            callback: function (curr, limit, totalCount) {
+
+                createTable(curr, limit, totalCount);
+
+            }
+
+        });
+
+
+    function createTable(currPage, limit, total) {
+
+        var html = [], showNum = limit;
+
+        if (total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+
+        html.push(' <table class="table table-hover piece" style="margin-left: 0;">');
+
+     /*   html.push(' <caption>悬停表格(' + total + ')</caption>');
+
+        html.push(' <thead><tr><th>名称</th><th>城市</th><th>密码</th></tr></thead><tbody>');
+
+        for (var i = 1; i <= showNum; i++) {
+
+            html.push('<tr><td>name' + currPage + '页_' + i + '</td>');
+
+            html.push('<td>city' + currPage + '页_' + i + '</td>');
+
+            html.push('<td>pwd' + currPage + '页_' + i + '</td>');
+
+            html.push('</tr>');
+
+        }
+
+        html.push('</tbody></table>');
+*/  html.push('</tbody></table>')
+        var mainObj = $('#mainContent');
+
+        mainObj.empty();
+
+        mainObj.html(html.join(''));
+
+    }
+
+</script>
+</html>
